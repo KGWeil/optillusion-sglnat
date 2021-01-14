@@ -20,7 +20,7 @@
             size(800,800); // Festlegen der Fenstergröße
         }        
     
-        public void zeichneBildC() {
+    public void zeichneBildC() {
             // ***** hier kommen deine Anweisungen hin ************
             square(0,0,200);
             for (int i=0; i<=2;i++) {
