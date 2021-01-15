@@ -9,7 +9,9 @@ import processing.core.PFont;
  * @author Natalia 
  */
 public class Kaffeehaus extends PApplet
-{       
+{
+    int s = 40; //Seitenlänge Quadrate
+    int[] verschiebung = {10, 20, 30, 20, 10, 20, 30, 20, 10, 20}; //Verschiebung der Quadrate in x-Richtung
     /**
      * settings() Methode 
      * Fenstergröße size(int width, int height) und smooth(int level) muss hier eingestellt werden.
@@ -27,6 +29,15 @@ public class Kaffeehaus extends PApplet
     }
     }
     
+    public void zeichneQuadrate(){
+        fill(0); //färbe schwarz
+            for (int k=0; k<=9;k++){ //Anzahl Quadrate in y-Richtung
+            for (int i=0; i<=7;i++){ //Anzahl Quadrate in x-Richtung
+                square(verschiebung[k]+s*2*i,k*s,s);
+        } 
+    }
+    }
+    
     /**
      * Die setup() Methode wird einmal aufgerufen, wenn das Programm startet.
      * Hier werden Einstellungen wie die Hintergrundfarbe vorgenommen
@@ -35,6 +46,9 @@ public class Kaffeehaus extends PApplet
     @Override
     public void setup()
     {
+        background(255); //Hintergrund weiß
+        parallelen(); //Aufruf der Methode
+        zeichneQuadrate();
     }
 
     /**
@@ -45,8 +59,6 @@ public class Kaffeehaus extends PApplet
     @Override
     public void draw()
     {
-        background(255); //Hintergrund weiß
-        parallelen(); //Aufruf der Methode
     }
 
     /**
