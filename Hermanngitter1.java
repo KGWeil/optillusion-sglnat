@@ -11,7 +11,8 @@ import processing.core.PFont;
  */
 public class Hermanngitter1 extends PApplet
 {       
-    int s=50; //Seitenlänge Quadrate
+    //globale Variablen
+    int s=50; //Seitenlaenge Quadrate
     int a=60; //Abstand Quadrate
     
     /**
@@ -25,9 +26,9 @@ public class Hermanngitter1 extends PApplet
     }        
 
     public void quadrate(){
-        fill(0);
-        for (int i=0;i<=6;i++){
-            for (int k=0;k<=6;k++){
+        fill(0); //schwarze Fuellfarbe
+        for (int i=0;i<=6;i++){ //7-mal in x-Richtung
+            for (int k=0;k<=6;k++){ //7-mal in y-Richtung
                 square(40+i*a,40+k*a,s);
             }
         }
@@ -41,7 +42,7 @@ public class Hermanngitter1 extends PApplet
     @Override
     public void setup()
     {
-        background(255);
+        background(255); //weisser Hintergrund
         quadrate();
     }
 
