@@ -24,9 +24,24 @@ public class Wellen1 extends PApplet
         size(360,300);
     }        
 
-    public void zeichneQuadrat(int x, int y, int farbe, boolean links){
-        fill(farbe,farbe,farbe);
-        rect(x,y,s,s);
+    public void zeichneQuadrat(int x, int y, int farbeQuadrat, boolean links){
+        fill(farbeQuadrat,farbeQuadrat,farbeQuadrat);
+        rect(x,y,s,s); //zeichne Rechteck mit s=40
+        if (farbeQuadrat==255){ //wenn Quadrat weiss
+            fill(0); //dann Kreise schwarz
+        }
+        else{ //wenn Quadrat schwarz
+            fill(225); //dann Kreise weiss
+        }
+        noStroke();
+        if (links) {
+            circle(x+6,y+6,10); //links oben
+            circle(x+6,y+34,10); //links unten
+        }
+        else {
+            circle(x+34,y+6,10); //rechts oben
+            circle(x+34,y+34,10); //rechts unten
+        }
     }
     
     /**
@@ -37,10 +52,7 @@ public class Wellen1 extends PApplet
     @Override
     public void setup()
     {
-        background(255);
-        zeichneQuadrat(0,0,255,true);
-        zeichneQuadrat(100,100,200,true);
-        zeichneQuadrat(200,200,20,true);
+        zeichneQuadrat(0,0,255,false);
     }
 
     /**
