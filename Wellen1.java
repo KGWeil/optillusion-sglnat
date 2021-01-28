@@ -13,7 +13,8 @@ public class Wellen1 extends PApplet
 {       
     //globale Variablen
     int s=40; //Seitenlaenge der Quadrate
-    
+    int a=6; //Abstand Kreismitte zu Quadratrand
+    int r=60; //Abstand Illusion zu Rand
     /**
      * settings() Methode 
      * Fenstergröße size(int width, int height) und smooth(int level) muss hier eingestellt werden.
@@ -21,26 +22,21 @@ public class Wellen1 extends PApplet
     @Override
     public void settings()
     {
-        size(360,300);
+        size(480,320);
     }        
 
     public void zeichneQuadrat(int x, int y, int farbeQuadrat, boolean links){
         fill(farbeQuadrat,farbeQuadrat,farbeQuadrat);
         rect(x,y,this.s,this.s); //zeichne Rechteck mit s=40
-        if (farbeQuadrat==255){ //wenn Quadrat weiss
-            fill(0); //dann Kreise schwarz
-        }
-        else{ //wenn Quadrat schwarz
-            fill(225); //dann Kreise weiss
-        }
+        fill(farbwechsel(farbeQuadrat));
         noStroke();
         if (links) {
-            circle(x+6,y+6,10); //links oben
-            circle(x+6,y+34,10); //links unten
+            circle(x+this.a,y+this.a,8); //links oben
+            circle(x+this.a,y+this.s-this.a,8); //links unten
         }
         else {
-            circle(x+34,y+6,10); //rechts oben
-            circle(x+34,y+34,10); //rechts unten
+            circle(x+this.s-this.a,y+this.a,8); //rechts oben
+            circle(x+this.s-this.a,y+this.s-this.a,8); //rechts unten
         }
     }
     
@@ -49,20 +45,27 @@ public class Wellen1 extends PApplet
         boolean links=true;
         for (int k=0;k<5;k++){
             for (int i=0;i<9;i++){
-                zeichneQuadrat(i*this.s,k*this.s,aktuelleFarbe,links);
-                if (aktuelleFarbe==0){
-                    aktuelleFarbe=255;
-                }
-                else{
-                    aktuelleFarbe=0;
-                }
+                zeichneQuadrat(i*this.s+this.r,k*this.s+this.r,aktuelleFarbe,links);
+                aktuelleFarbe=farbwechsel(aktuelleFarbe);
             }
-            if(links==true){
-                links=false;
-            }
-            else{
-                links=true;
-            }
+            links = ! links;
+        }
+    }
+    
+    public int farbwechsel(int farbe){
+        if (farbe==0){
+            return 255;
+        }
+        else{
+            return 0;
+        }
+    }
+    
+    public void alleTrennlinien(){
+        colorMode(RGB,100);
+        for (int k=1;k<5;k++){
+            stroke(0,100,0);
+            line(this.r,k*this.s+this.r,360+this.r,k*this.s+this.r);
         }
     }
     
@@ -74,18 +77,8 @@ public class Wellen1 extends PApplet
     @Override
     public void setup()
     {
-        //for(int i=0; i<5; i++) {
-            //boolean kreisLinks = (i%2 == 0) ? true : false;
-            //boolean kreisLinks = false;
-            //if(i%2 == 0) {
-            //    kreisLinks = true;
-            //}
-            //else {
-            //    kreisLinks = false;
-            //}
-            //zeichneQuadrat(i*this.s,i*this.s,0,kreisLinks);
-        //}
         alleQuadrate();
+        alleTrennlinien();
     }
 
     /**
