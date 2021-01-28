@@ -26,7 +26,7 @@ public class Wellen1 extends PApplet
 
     public void zeichneQuadrat(int x, int y, int farbeQuadrat, boolean links){
         fill(farbeQuadrat,farbeQuadrat,farbeQuadrat);
-        rect(x,y,s,s); //zeichne Rechteck mit s=40
+        rect(x,y,this.s,this.s); //zeichne Rechteck mit s=40
         if (farbeQuadrat==255){ //wenn Quadrat weiss
             fill(0); //dann Kreise schwarz
         }
@@ -44,6 +44,28 @@ public class Wellen1 extends PApplet
         }
     }
     
+    public void alleQuadrate(){
+        int aktuelleFarbe=0;
+        boolean links=true;
+        for (int k=0;k<5;k++){
+            for (int i=0;i<9;i++){
+                zeichneQuadrat(i*this.s,k*this.s,aktuelleFarbe,links);
+                if (aktuelleFarbe==0){
+                    aktuelleFarbe=255;
+                }
+                else{
+                    aktuelleFarbe=0;
+                }
+            }
+            if(links==true){
+                links=false;
+            }
+            else{
+                links=true;
+            }
+        }
+    }
+    
     /**
      * Die setup() Methode wird einmal aufgerufen, wenn das Programm startet.
      * Hier werden Einstellungen wie die Hintergrundfarbe vorgenommen
@@ -52,7 +74,18 @@ public class Wellen1 extends PApplet
     @Override
     public void setup()
     {
-        zeichneQuadrat(0,0,255,false);
+        //for(int i=0; i<5; i++) {
+            //boolean kreisLinks = (i%2 == 0) ? true : false;
+            //boolean kreisLinks = false;
+            //if(i%2 == 0) {
+            //    kreisLinks = true;
+            //}
+            //else {
+            //    kreisLinks = false;
+            //}
+            //zeichneQuadrat(i*this.s,i*this.s,0,kreisLinks);
+        //}
+        alleQuadrate();
     }
 
     /**
